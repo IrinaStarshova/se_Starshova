@@ -48,22 +48,35 @@ public class PlayingCard {
 	
 	
 	//TODO #1: Write an instance variables that will handle the Integer value of number and suit.   
-	
+	private int cardNumber;
+	private int cardSuit;
 	//END TODO #1
-	
-	
+
+	/**
+	 * Sets the JOKER value to number and suit
+	 *
+	 */
+	private void setJokerCard()
+	{
+		cardNumber=JOKER;
+		cardSuit=JOKER;
+	}
+
 	public PlayingCard(int number, int suit) {
 		
 		//TODO #2: Write code that will filter number and suit with the range provided above.
 		// Assign the number and suit argument to instance variable respectively
 		// If the arguments were not filter, make a code that will assign instance variables to a JOKER value
-		
-		//END TODO #2
-		
-	
+		if ((number>=ACE && number<=KING) && (suit>=CLUBS && suit<=SPADES))
+		{
+			cardNumber=number;
+			cardSuit=suit;
 		}
-			
-	
+		else
+			setJokerCard();
+		//END TODO #2
+		}
+
 	/**
 	 * Creates an instance of a JOKER PlayingCard 
 	 * 
@@ -72,12 +85,8 @@ public class PlayingCard {
 
 		//TODO #3: Make an instance of JOKER playing card
 		// Assign instance variable to a JOKER value
-		
+		setJokerCard();
 		//END TODO #3
-		
-		
-		
-		
 	}
 
 	/**
@@ -93,7 +102,7 @@ public class PlayingCard {
 		
 		//END TODO #4
 	
-		return 0;
+		return cardNumber;
 	}
 
 
@@ -110,16 +119,72 @@ public class PlayingCard {
 		
 		//END TODO #5
 
-		return 0;
+		return cardSuit;
 	}
 
+	/**
+	 * Return a String representation of card number
+	 *
+	 */
+	private String numberToString() {
+		switch(cardNumber) {
+			case ACE:
+				return "ACE";
+			case TWO:
+				return "TWO";
+			case THREE:
+				return  "THREE";
+			case FOUR:
+				return  "FOUR";
+			case FIVE:
+				return  "FIVE";
+			case SIX:
+				return  "SIX";
+			case SEVEN:
+				return  "SEVEN";
+			case EIGHT:
+				return  "EIGHT";
+			case NINE:
+				return  "NINE";
+			case TEN:
+				return  "TEN";
+			case JACK:
+				return "JACK";
+			case QUEEN:
+				return  "QUEEN";
+			case KING:
+				return  "KING";
+			default:
+				return "";
+		}
+	}
+
+	/**
+	 * Return a String representation of card suit
+	 *
+	 */
+	private String suitToString() {
+		switch(cardSuit) {
+			case CLUBS:
+				return "CLUBS";
+			case DIAMONDS:
+				return "DIAMONDS";
+			case HEARTS:
+				return  "HEARTS";
+			case SPADES:
+				return  "SPADES";
+			default:
+				return "";
+		}
+	}
 
 	/**
 	 * Return a String representation of this card in the following form:
 	 * "<number> of <suit>"
-	 * 
+	 *
 	 * @return the String representation of this card
 	 */
+
 	public String toString() {
 		
 		//TODO #6: Make a code that will convert the Integer value of number and suit into String.
@@ -127,9 +192,9 @@ public class PlayingCard {
 		// Provide single space between number-of and of-suit.
 		// It will be easier if a switch-case statement is use in the code. 
 		// Make a code that will return the String value of JOKER if the default value was chosen
-		
+
 		//END TODO #6
-		
-		return "";
+
+		return (cardNumber==0) ? "JOKER" : numberToString() + " of " + suitToString();
 	}
 }
