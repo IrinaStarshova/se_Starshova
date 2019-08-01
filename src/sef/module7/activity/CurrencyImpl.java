@@ -12,9 +12,9 @@ import java.util.Calendar;
  */
 public class CurrencyImpl implements Currency {
 	
-	private float value;
-	private Denomination denomination;
-	private Calendar createDate;
+	private  float value;
+	private  Denomination denomination;
+	private  Calendar createDate;
 
 
 	/**
@@ -34,28 +34,28 @@ public class CurrencyImpl implements Currency {
 	 * @see sef.module6.activity.Currency#getValue()
 	 */
 	public float getValue() {
-		return 1;
+		return value;
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module6.activity.Currency#getDenomination()
 	 */
 	public Denomination getDenomination() {
-		return null;
+		return denomination;
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module6.activity.Currency#getCreateDate()
 	 */
 	public Calendar getCreateDate() {
-		return null;
+		return (Calendar)createDate.clone();
 	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "";
+		return value + " " + denomination.toString() + " " + createDate.getTime();
 	}
 
 	
@@ -63,8 +63,10 @@ public class CurrencyImpl implements Currency {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o) {
-		
-		return false;
+		if (!(o instanceof Currency))
+			return false;
+		Currency o_=(Currency)o;
+		return o_.getDenomination().getName().equals(denomination.getName()) && o_.getValue()==value;
 	}
 
 }
