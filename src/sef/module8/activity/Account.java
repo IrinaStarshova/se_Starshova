@@ -1,8 +1,10 @@
 package sef.module8.activity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Thsi class represents a simple representation of an account encapsulating
+ * This class represents a simple representation of an account encapsulating
  * a name 
  * 
  * @author John Doe
@@ -10,19 +12,25 @@ package sef.module8.activity;
  */
 public class Account {
 
+	private String accountName;
 
 
 	/**
-	 * Creates an Account object with the specified name.  If the accout name
+	 * Creates an Account object with the specified name.  If the account name
 	 * given violates the minimum requirements, then an AccountException is thrown
 	 * 
 	 * @param accountName
 	 * @throws AccountException
 	 */
 	public  Account(String accountName) throws AccountException{
-			
-			
-			
+		Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$");
+		Matcher m = p.matcher(accountName);
+		if(accountName.length()<5)
+			throw new AccountException(AccountException.NAME_TOO_SHORT,accountName);
+		else if(!m.matches())
+			throw new AccountException(AccountException.NAME_TOO_SIMPLE,accountName);
+		else this.accountName=accountName;
+
 	}
 	
 	
@@ -32,6 +40,6 @@ public class Account {
 	 * @return the account name
 	 */
 	public String getName(){
-		return "";
+		return accountName;
 	}
 }
