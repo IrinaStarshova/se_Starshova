@@ -1,8 +1,6 @@
 package sef.module9.activity;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Implementation of a Radar 
@@ -12,12 +10,12 @@ import java.util.List;
 public class RadarImpl implements Radar{
 
 
-	
+	private HashMap<String,RadarContact> radarContacts;
 	/**
 	 *  Constructs a new Radar 
 	 */
 	public RadarImpl(){
-		
+		radarContacts= new HashMap<>();
 	}
 	
 	
@@ -25,14 +23,17 @@ public class RadarImpl implements Radar{
 	 * @see sef.module8.activity.Radar#addContact(sef.module8.activity.RadarContact)
 	 */
 	public RadarContact addContact(RadarContact contact) {
-		return null;
+		if (contact == null)
+			return null;
+		radarContacts.put(contact.getContactID(), contact);
+		return radarContacts.get(contact.getContactID());
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module8.activity.Radar#getContact(java.lang.String)
 	 */
 	public RadarContact getContact(String id) {
-		return null;
+		return radarContacts.get(id);
 	}
 
 	/* (non-Javadoc)
@@ -40,30 +41,31 @@ public class RadarImpl implements Radar{
 	 */
 	public int getContactCount() {
 		
-		return 0;
+		return radarContacts.size();
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module8.activity.Radar#removeContact(java.lang.String)
 	 */
 	public RadarContact removeContact(String id) {
-		
-		return null;
+		return radarContacts.remove(id);
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module8.activity.Radar#returnContacts()
 	 */
 	public List<RadarContact> returnContacts() {
-		return null;
+		return new ArrayList<>(radarContacts.values());//radarContacts;
 	}
 
 	/* (non-Javadoc)
 	 * @see sef.module8.activity.Radar#returnContacts(java.util.Comparator)
 	 */
 	public List<RadarContact> returnContacts(Comparator<RadarContact> comparator) {
-		return null;
-//		return Collections.sort(arg0, new DistanceComparator());
+		//return null;
+		ArrayList<RadarContact> radarContacts_= new ArrayList<>(radarContacts.values());
+		radarContacts_.sort(new DistanceComparator());
+		return radarContacts_;
 	}
 
 	
